@@ -30,6 +30,8 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
+        'is_admin',
+        'is_active',
         'remember_token',
     ];
 
@@ -42,4 +44,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function posts()
+    {
+        return $this->hasMany('App\Post');
+    }
 }
