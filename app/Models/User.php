@@ -13,14 +13,13 @@ class User extends Authenticatable
     use HasApiTokens, HasFactory, Notifiable;
 
     /**
-     * The attributes that are mass assignable.
+     * The attributes that aren't mass assignable.
      *
      * @var array<int, string>
      */
-    protected $fillable = [
-        'name',
-        'email',
-        'password',
+
+    protected $guarded =[
+        'is_admin',
     ];
 
     /**
@@ -30,8 +29,6 @@ class User extends Authenticatable
      */
     protected $hidden = [
         'password',
-        'is_admin',
-        'is_active',
         'remember_token',
     ];
 
@@ -45,8 +42,8 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function posts()
-    {
-        return $this->hasMany('App\Post');
-    }
+    // public function posts(): HasMany
+    // {
+    //     return $this->hasMany(Post::class,'user_id');
+    // }
 }
