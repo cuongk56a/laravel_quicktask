@@ -18,9 +18,15 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'username',
+        'first_name',
+        'last_name',
         'email',
         'password',
+    ];
+
+    protected $guarded =[
+        'is_admin',
     ];
 
     /**
@@ -45,8 +51,8 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function posts()
-    {
-        return $this->hasMany('App\Post');
-    }
+    // public function posts()
+    // {
+    //     return $this->hasMany(Post::class,'user_id');
+    // }
 }
