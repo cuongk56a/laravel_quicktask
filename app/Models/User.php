@@ -3,10 +3,13 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+use App\Models\Scopes\ActiveUserScope;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Str;
+use Illuminate\Database\Eloquent\Builder;
 
 class User extends Authenticatable
 {
@@ -44,5 +47,22 @@ class User extends Authenticatable
     public function posts()
     {
         return $this->belongsTo(User::class, 'user_id');
+    }
+
+    public function getFullnameAttribute(){
+        return $this->first_name." ".$this->last_name;
+    }
+
+    public function setUsernameAttribute($value){
+        $this->username = Str::slug($value);
+    }
+
+    public function scopeAdmin($query){
+        return $query->where('is_admin', true);
+    }
+
+    protected static function booted(): void
+    {
+        static::addGlobalScope(new ActiveUserScope);
     }
 }
