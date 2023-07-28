@@ -10,6 +10,6 @@ class Post extends Model
     use HasFactory;
     
     public function user(){
-        return $this->belongsTo('App\User');
+        return $this->hasMany(Post::class, 'user_id');
     }
 }

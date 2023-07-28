@@ -15,7 +15,10 @@ return new class extends Migration
             $table->increments('id');
             $table->string('title');
             $table->text('body');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
+
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
