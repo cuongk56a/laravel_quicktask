@@ -1,6 +1,6 @@
 {
   "name": "laravel_quicktask",
-  "description": "<p align=\"center\"><a href=\"https://laravel.com\" target=\"_blank\"><img src=\"https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg\" width=\"400\" alt=\"Laravel Logo\"></a></p>",
+  "description": "",
   "main": "postcss.config.js",
   "authors": [
     "cuongk56a <laclac10921@gmail.com>"
@@ -12,6 +12,10 @@
     "node_modules",
     "bower_components",
     "test",
-    "tests"
-  ]
+    "tests",
+    "public/bower_components/"
+  ],
+  "dependencies":{
+    "Laravel-CRUD-With-Multiple-Image-Upload": "cuongk56a/Laravel-CRUD-With-Multiple-Image-Upload"
+  }
 }

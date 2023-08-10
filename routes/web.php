@@ -28,17 +28,31 @@ Route::get('/dashboard', function () {
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 
-Route::resource('users',UserController::class)->middleware(['admin']);
+Route::prefix('/users')
+    ->middleware('admin')
+    ->controller(UserController::class)
+    ->group(function () {
+        Route::get('/', 'index')->name('users.index');
+        Route::get('/create', 'create')->name('users.create');
+        Route::get('/{user}/edit', 'edit')->name('users.edit');
+        Route::get('/{user}', 'show')->name('users.show');
+        Route::post('/', 'store')->name('users.store');
+        Route::put('/{user}', 'update')->name('users.update');
+        Route::delete('/{user}', 'destroy')->name('users.destroy');
+        Route::get('/{user}/posts', 'getPostsByUser')->name('users.posts');
+    });
 
-Route::prefix('post')->controller(PostController::class)->group(function(){
-    Route::get('/','index')->name('posts.index');
-    Route::get('/create','create')->name('posts.create');
-    Route::post('/','store')->name('posts.store');
-    Route::get('/{post}','show')->name('posts.show');
-    Route::get('/{post}/edit','edit')->name('posts.edit');
-    Route::match(['PUT','PATH'],'/{post}','update')->name('posts.update');
-    Route::delete('/{post}','destroy')->name('posts.destroy');
-});
+// Route::prefix('users')->controller(PostController::class)->group(function(){
+//     Route::get('/{user}/posts', 'index')->name('posts.index');
+//     Route::get('/create','create')->name('posts.create');
+//     Route::post('/','store')->name('posts.store');
+//     Route::get('/{post}','show')->name('posts.show');
+//     Route::get('/{post}/edit','edit')->name('posts.edit');
+//     Route::match(['PUT','PATH'],'/{post}','update')->name('posts.update');
+//     Route::delete('/{post}','destroy')->name('posts.destroy');
+// });
+
+Route::resource('posts', PostController::class);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -46,6 +60,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/lang/{lang}', [LanguageController::class, 'changeLanguage'])->name('lang');
+Route::get('language/{lang}', [LanguageController::class, 'changeLanguage'])->name('locale');
 
 require __DIR__.'/auth.php';

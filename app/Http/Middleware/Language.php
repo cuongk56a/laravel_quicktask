@@ -17,11 +17,8 @@ class Language
      */
     public function handle(Request $request, Closure $next): Response
     {   
-        if(Session::get('local')!=null){
-            App::setLocale(Session::get('local'));
-        }else{
-            Session::put('locale','vi');
-            App::setLocale(Session::get('local'));
+        if (Session::get('lang')) {
+            App::setLocale(Session::get('lang'));
         }
         return $next($request);
     }

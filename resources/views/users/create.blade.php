@@ -1,33 +1,42 @@
 <x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
+    <form method="POST" action="{{ route('users.store') }}">
         @csrf
+
+        <!-- Change Language
+        <div class="flex justify-end">
+            <x-nav-link :href="route('locale', ['lang' => 'vi'])">
+                {{ __('VI') }}
+            </x-nav-link>
+            <x-nav-link :href="route('locale', ['lang' => 'en'])">
+                {{ __('EN') }}
+            </x-nav-link>
+        </div> -->
 
         <!-- First Name -->
         <div>
-            <x-input-label for="first_name" :value="__('First Name')" />
-            <x-text-input id="first_name" class="block mt-1 w-full" type="text" name="first_name" :value="old('first_name')" required autofocus autocomplete="first_name" />
+            <x-input-label for="first-name" :value="__('First Name')" />
+            <x-text-input id="first-name" class="block mt-1 w-full" type="text" name="first_name" :value="old('first_name')" required autofocus autocomplete="name" />
             <x-input-error :messages="$errors->get('first_name')" class="mt-2" />
         </div>
 
         <!-- Last Name -->
         <div class="mt-4">
-            <x-input-label for="last_name" :value="__('Last Name')" />
-            <x-text-input id="last_name" class="block mt-1 w-full" type="text" name="last_name" :value="old('last_name')" required autofocus autocomplete="last_name" />
+            <x-input-label for="last-name" :value="__('Last Name')" />
+            <x-text-input id="last-name" class="block mt-1 w-full" type="text" name="last_name" :value="old('last_name')" required autocomplete="name" />
             <x-input-error :messages="$errors->get('last_name')" class="mt-2" />
         </div>
+
+        <!-- Username -->
+        <div class="mt-4">
+            <x-input-label for="username" :value="__('Username')" />
+            <x-text-input id="username" class="block mt-1 w-full" type="text" name="username" :value="old('username')" required autocomplete="username" />
+            <x-input-error :messages="$errors->get('username')" class="mt-2" />
 
         <!-- Email Address -->
         <div class="mt-4">
             <x-input-label for="email" :value="__('Email')" />
             <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="username" />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
-
-        <!-- Username -->
-        <div class="mt-4">
-            <x-input-label for="username" :value="__('text.username')" />
-            <x-text-input id="username" class="block mt-1 w-full" type="text" name="username" :value="old('username')" required autocomplete="username" />
-            <x-input-error :messages="$errors->get('username')" class="mt-2" />
         </div>
 
         <!-- Password -->
@@ -44,7 +53,7 @@
 
         <!-- Confirm Password -->
         <div class="mt-4">
-            <x-input-label for="password_confirmation" :value="__('Confirm password')" />
+            <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
 
             <x-text-input id="password_confirmation" class="block mt-1 w-full"
                             type="password"
