@@ -1,0 +1,21 @@
+{
+  "name": "laravel_quicktask",
+  "description": "",
+  "main": "postcss.config.js",
+  "authors": [
+    "cuongk56a <laclac10921@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/cuongk56a/laravel_quicktask",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests",
+    "public/bower_components/"
+  ],
+  "dependencies":{
+    "Laravel-CRUD-With-Multiple-Image-Upload": "cuongk56a/Laravel-CRUD-With-Multiple-Image-Upload"
+  }
+}
